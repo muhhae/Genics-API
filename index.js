@@ -16,6 +16,7 @@ app.use(cors({
 //Import routes
 const usersRoute = require("./routes/users");
 const productsRoute = require("./routes/products");
+const transactionsRoute = require("./routes/transactions");
 
 //DB connection
 connect(`${process.env.MONGO_DB}`)
@@ -35,3 +36,4 @@ app.get("/", (req, res) => {
 })
 app.use("/products", productsRoute);
 app.use("/users", usersRoute);
+app.use("/transactions", transactionsRoute);

@@ -33,7 +33,44 @@ const saveUser = async (req, res) => {
   }
 };
 
+const updateUser = async (req, res) => {
+  try {
+    const userID = req.params.id;
+    const updatedUser = await User.findByIdAndUpdate(userID, req.body, { new: true });
+    res.status(200).json({
+      message: "Update user success",
+      data: updatedUser
+    })
+  }
+  catch (error) {
+    res.status(500).json({
+      message: "Update user failed",
+      data: error
+    })
+  }
+
+};
+
+const deleteUser = async (req, res) => {
+  try {
+    const userID = req.params.id;
+    const deletedUser = await User.findByIdAndDelete(userID);
+    res.status(200).json({
+      message: "Delete user success",
+      data: deletedUser
+    })
+  }
+  catch (error) {
+    res.status(500).json({
+      message: "Delete user failed",
+      data: error
+    })
+  }
+}
+
 module.exports = {
   getUsers,
-  saveUser
+  saveUser,
+  updateUser,
+  deleteUser
 }
