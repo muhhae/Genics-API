@@ -3,6 +3,19 @@ services:
   app:
     build: .
     ports:
-      - 5000:5000
+      - '5000:5000'
     environment:
-      - env= .env
+      - MONGO_DB=mongodb://mongodb:27017/mydatabase
+      - PORT=5000
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongodb-data:/data/db
+volumes:
+  mongodb-data:
+  mongodb-test-data:
